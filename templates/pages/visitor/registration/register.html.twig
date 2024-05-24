@@ -10,12 +10,12 @@
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
     {{ form_start(form) }}
-     <main class="  d-flex align-items-center container-fluid h-100 ">
+     <main class="  d-flex align-items-center container-fluid h-100 mt-4 ">
         <section class="container-fluid d-flex flex-column align-items-center shadow ">
             <div id="logo" class="d-flex align-items-center justify-content-center bg-white bg-opacity-75 ">
                 <img src="./images/logo.png" alt="logo">   
             </div>
-            <div  >
+            <div >
                 <div class="m-2 p-2">
                 
                     <div class="d-flex flex-lg-row smview  w-100">
@@ -40,15 +40,15 @@
                         </div>
                     </div>
                     <div class="d-flex flex-lg-row smview  w-100">
-                      <div class=" col-lg-4 row-cols-sm-1 pe-md-1 my-1 d-flex flex-column input">
+                      <div class=" col-md-4 row-cols-sm-1 pe-md-1 my-1 d-flex flex-column input">
                           <label for="registration_form_adresse" > Adresse<div class="text-danger"><small><em>{{form_errors(form.adresse)}}</em></small></div></label>
                           {{ form_widget(form.adresse) }}
                       </div>
-                      <div class=" col-lg-4 row-cols-sm-1 my-1 px-md-1 d-flex flex-column input">
+                      <div class=" col-md-4 row-cols-sm-1 my-1 px-md-1 d-flex flex-column input">
                           <label for="registration_form_ville" > Ville<div class="text-danger"><small><em>{{form_errors(form.ville)}}</em></small></div></label>
                           {{ form_widget(form.ville) }}
                       </div>
-                      <div class=" col-lg-4 row-cols-sm-1  ps-md-1 my-1 d-flex flex-column input">
+                      <div class=" col-md-4 row-cols-sm-1  ps-md-1 my-1 d-flex flex-column input">
                           <label for="registration_form_cp" > Code Postal<div class="text-danger"><small><em>{{form_errors(form.cp)}}</em></small></div></label>
                           {{ form_widget(form.cp) }}
                       </div>

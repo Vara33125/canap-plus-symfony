@@ -19,7 +19,9 @@
     color: #eee0cb !important;
   }
   
-
+  body{
+    background-color: #f5f5f5;
+  }
   
   h1 {
     display: none;

@@ -20,7 +20,8 @@
         <meta name="author" content="Vincent K.">
         <meta name="publisher" content="Vincent K.">
 
-        {# CSS part of Bootstrap 5 #}
+        {# CSS part of Bootstrap 5 & fontawesome Icon #}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> 
         {% block style %}
         <link rel="stylesheet" href="/styles/styles.css">
@@ -30,7 +31,7 @@
     </head>
     <body>
         
-    <nav class="colorMenu navbar navbar-expand-sm .d-sm-none .d-md-block ">
+    <nav class="colorGreen navbar navbar-expand-sm .d-sm-none .d-md-block ">
       <div class="container-fluid">
       <div class=" d-flex justify-content-start me-5 ms-0">
       {% if app.user %}
@@ -45,9 +46,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#"
-                >Nos produits</a
-              >
+              <a class="nav-link active " aria-current="page" href="#">Nos produits</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="magasins.html"> Nos magasins</a>
@@ -57,16 +56,41 @@
               <a class="nav-link" href="about-us.html">Qui sommes nous ? </a>
             </li>
           </ul>
-          <form class="d-flex" role="search">
+          
+            {% if app.user %}
+              <div class="dropdown-center me-3 my-1">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                 <i class="fa-solid fa-user"></i> 
+                </button>
+                <ul class="dropdown-menu ">
+                  <li><a class="dropdown-item" href="#">Modifier mes informations</a></li>
+                  <li><a class="dropdown-item" href="#">Voir mon panier</a></li>
+                  {% if is_granted('ROLE_ADMIN') %}
+                    <li><a class="dropdown-item" href="#">Espace Administration</a></li>
+                  {% endif %}
+                  <li><a class="dropdown-item" href="{{path('app_logout')}}">Se déconnecter</a></li>
+                </ul>
+              </div>
+              <form class="d-flex my-1" role="search">
             <input
               class="form-control me-2"
               type="search"
               placeholder="Rechercher"
               aria-label="Search"
             />
-            <a id="signIn" href="{{path('visitor_app_register')}}" class="btn connect">S'inscrire </a>
-            <a href="connection.html" class="btn connect"> Connexion</a>
           </form>
+            {% else %}
+            <form class="d-flex" role="search">
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Rechercher"
+              aria-label="Search"
+            />
+          </form>
+                <a id="signIn" href="{{path('visitor_app_register')}}" class="btn connect">S'inscrire </a>
+                <a href="{{path('visitor_app_login')}}" class="btn connect"> Connexion</a>
+            {% endif %}
         </div>
       </div>
     </nav>
@@ -90,3 +114,4 @@
         crossorigin="anonymous"
       ></script>
     </body>
+</html>

@@ -1,0 +1,82 @@
+.colorGreen {
+    background-color: #506c64;
+  }
+  .colorMenu {
+    background-color: #eee0cb !important;
+  }
+  .burgerMenu {
+    margin-right: 5px;
+  }
+  .colorFooter {
+    color: #eee0cb !important;
+  }
+  .connect:hover {
+    background-color: #506c64 !important;
+    color: #eee0cb !important;
+  }
+  .btn-colorGreen {
+    background-color: #506c64 !important;
+    color: #eee0cb !important;
+  }
+  
+
+  
+  h1 {
+    display: none;
+    color: #eee0cb !important;
+  }
+  h3 {
+    font-family: "Quicksand", sans-serif;
+    color: #eee0cb !important;
+  }
+  input {
+    background-color: #eee0cb;
+    height: 40px;
+    border-radius: 5px;
+  }
+  
+  #form{
+    box-sizing: border-box;
+    width: 55%;
+  }
+  footer {
+    height: 150px;
+  }
+  @media screen and (min-width: 700px) {
+    h1 {
+      display: block;
+      margin: 0 auto;
+    }
+    .burgerMenu {
+      display: none;
+    }
+    h3 {
+      margin-left: 3%;
+    }
+  }
+  @media screen and (max-width: 500px) {
+    .smview {
+      display: flex !important;
+      flex-direction: column !important;
+    }
+    label {
+      margin: 2px;
+    }
+    input {
+      margin: 2px;
+    }
+    #form,
+    #logo {
+      width: 100%;
+    }
+    h4 {
+      display: none;
+    }
+    main {
+      height: 140vh;
+    }
+    .input {
+      padding: 0px !important;
+    }
+  }
+  

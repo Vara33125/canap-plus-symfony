@@ -1,1 +1,12 @@
 {% extends 'themes/base_admin.html.twig' %}
+
+{% block title %}Tableau de bord{% endblock %}
+{% block description %}Tableau de bord{% endblock %}
+{% block keywords %}Tableau de bord, admin , gestion, back, office{% endblock %}
+
+
+{% block main %}
+    
+    <h1 class="text-center my-3"> Bienvenue {{app.user.prenom}} dans votre espace d'administration</h1>
+
+{% endblock %}

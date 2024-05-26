@@ -20,6 +20,11 @@ class Product
     #[ORM\Column]
     private ?int $id = null;
     
+    #[Assert\Length(
+        max: 255,
+        maxMessage: 'Le nom ne doit pas depasser {{ limit }} caractères',
+    )]
+    #[Assert\NotBlank(message: 'Le nom est obligatoire')]
     #[ORM\Column(length: 255)]
     private ?string $name = null;
     
@@ -38,10 +43,26 @@ class Product
 
     #[ORM\Column(length: 500)]
     private ?string $picture = null;
-
+    
+    #[Assert\NotBlank(message: "Le prix de vente est obligatoire.")]
+    #[Assert\Positive(message: "Le prix de vente doit être un nombre positif.")]
+    #[Assert\Regex(
+            pattern: "/^\d+(.\d{1,2})?$/",
+            message: "Le prix de vente doit être un entier ou un nombre décimal avec au plus deux décimales."
+    )]
+    #[Assert\Range(
+            min: 0.1,
+            max: 9999999,
+            notInRangeMessage: 'Le prix de vente doit être compris entre {{ min }} euros {{ max }} euros.',
+    )]
     #[ORM\Column(type: Types::DECIMAL, precision: 6, scale: 2)]
     private ?string $price = null;
-
+    
+    #[Assert\Length(
+        max: 255,
+        maxMessage: 'La descriptio, ne doit pas depasser {{ limit }} caractères',
+    )]
+    #[Assert\NotBlank(message: 'La description est obligatoire')]
     #[ORM\Column(length: 500)]
     private ?string $description = null;
 

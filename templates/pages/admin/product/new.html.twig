@@ -1,0 +1,60 @@
+{% extends 'themes/base_admin.html.twig' %}
+
+{% block title %}Créer un produit{% endblock %}
+
+{% block description %}Créer un produit{% endblock %}
+
+{% block keywords %}Admin, créer, produit{% endblock %} 
+ 
+{% block main %}
+ <h1 class="text-center my-3 display-5">Nouvel article<hr></h1>
+    {% include 'components/_alert.html.twig' %}
+    
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-9 mx-auto">
+                {{form_start(form)}}
+                    <div class="mb-3">
+                        <label for="admin_post_form_name">Name</label>
+                        {{form_widget(form.name, {'attr':{'class':'form-control', 'autofocus':'autofocus'}})}}
+                        <div class="text-danger">{{form_errors(form.name)}}</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="admin_post_form_category">Catégorie</label>
+                        {{form_widget(form.Category, {'attr':{'class':'form-control'}})}}
+                        <div class="text-danger">{{form_errors(form.Category)}}</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="admin_post_form_imageFile_image">Image</label>
+                        {{form_widget(form.imageFile, {'attr':{'class':'form-control'}})}}
+                        <div class="text-danger">{{form_errors(form.imageFile)}}</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="admin_post_form_price">Prix de vente</label>
+                        {{form_widget(form.price, {'attr':{'class':'form-control'}})}}
+                        <div class="text-danger">{{form_errors(form.price)}}</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="admin_post_form_content">Description</label>
+                        {{ form_widget(form.description, {"id":"editor", "attr":{"class":"form-control", "rows":10}}) }}
+                        <div class="text-danger">{{form_errors(form.description)}}</div>
+                    </div>
+                    <div class="mb-3">
+                        <input formnovalidate type="submit" class="btn btn-secondary shadow" value="Ajouter">
+                    </div>
+                {{form_end(form)}}
+            </div>
+        </div>
+    </div>
+    {% block ckEditor %}
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#editor' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
+    {% endblock %}
+{% endblock %}

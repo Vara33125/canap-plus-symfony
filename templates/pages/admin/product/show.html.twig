@@ -1,0 +1,41 @@
+{% extends 'themes/base_admin.html.twig' %}
+
+
+{% block title %}{{product.name}}{% endblock %}
+
+{% block description %}Détail du produit{% endblock %}
+
+{% block keywords %}Admin, lire, produit{% endblock %}
+
+{% block main %}
+    <h1 class="text-center my-3 display-5"> {{product.name}}</h1>
+    {% include 'components/_alert.html.twig' %}
+        <div class="d-flex align-items-end my-2 flex-column">
+            <div>
+            {{product.category.name}}
+            </div>
+            <div>
+            
+            {% if product.isPublished %}
+                <small><em>| publié le : {{product.publishedAt | format_date()}}</em></small>
+            {% endif %}
+            </div>
+        </div>
+    <div class="container-fluid">
+        <div class="row img-fluid">
+        {% if product.picture %}
+            <img class="float" src="{{vich_uploader_asset(product, 'imageFile')}} " alt="{{product.name}}">
+        {% endif %}
+        </div>
+        <div class="container-fluid">
+            <p class="fw-bold mt-4">Description du produit <p>
+            <p class=" mx-auto w-50 ">{{product.description | raw}}</p>
+        </div>
+    <a href="{{ path('app_product_index') }}" class="btn btn-secondary justify-content-end">retour</a>
+    </div>
+{% endblock %}
+
+
+   
+
+

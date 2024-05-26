@@ -1,0 +1,94 @@
+{% extends 'themes/base_admin.html.twig' %}
+
+{% block title %}Liste des produits{% endblock %}
+
+{% block description %}Liste des produits{% endblock %}
+
+{% block keywords %}Admin, liste, produits{% endblock %}
+
+{% block jQuery %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{% endblock %}
+
+{% block DataTables %}
+    <link href="https://cdn.datatables.net/v/bs5/dt-2.0.7/datatables.min.css" rel="stylesheet">
+    <script src="https://cdn.datatables.net/v/bs5/dt-2.0.7/datatables.min.js"></script>
+    <script>
+        $(document).ready( function () {
+            $('#myTable').DataTable({
+                language: { 
+                    url: 'https://cdn.datatables.net/plug-ins/2.0.7/i18n/fr-FR.json'
+                },
+            })
+        } );
+    </script>
+{% endblock %}
+
+{% block main %}
+    <h1 class="my-3 text-center">Liste des produits</h1>
+    {% include 'components/_alert.html.twig' %}
+    <div class="d-flex justify-content-end align-items-center my-3">
+        <a href="{{path('app_product_create')}}" class="btn btn-secondary shadow"><i class="fa-solid fa-plus"></i> Nouveau produit</a>
+    </div>
+    <div class="table-responsive mx-auto">
+        <table  id="myTable" class="table table-hover text-center table-bordered">
+            <thead class="table-dark">
+                <tr>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>Slug</th>
+                    <th>Catégorie</th>
+                    <th>Image</th>
+                    <th>Prix de vente</th>
+                    <th>Description</th>
+                    <th>Est publié?</th>
+                    <th>Options</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for product in products %}
+                <tr>
+                    <td>{{ product.id }}</td>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.slug }}</td>
+                    <td>{{ product.category.name}}</td>
+                    <td><img  src="{{vich_uploader_asset(product, 'imageFile') | imagine_filter('admin') }}" alt="{{product.name}}"></td>
+                    <td>{{ product.price }} €</td>
+                    <td>{{ product.description }}</td>
+                    <td>{% if product.isPublished %}
+                        <div>
+                            <p>Oui publié le : </p>
+                            {{product.publishedAt | format_datetime()}}
+                        </div>
+                        {% else %}
+                            <p>Non</p>
+                        {% endif %}</td>
+                
+                    <td>
+                        <div class="d-flex flex-column justify-content-around h-100">
+                            <form action="{{path('admin_product_publish', {'id': product.id})}}" method="post" class="mb-2">
+                                <input type="hidden" name="_csrf_token" value="{{csrf_token('publish_product_'~product.id)}}">
+                                <div class="form-check form-switch d-flex flex-column align-items-center">
+                                    <input onclick="return confirm('Confirmer cette action?')" onchange="this.form.submit()" class="form-check-input" type="checkbox" role="switch" {{product.isPublished ?'checked' :''}}>
+                                </div>
+                            </form>
+                            <a href="{{path('app_product_show', {'id': product.id ,'slug' : product.slug })}}"><i class="fa-solid fa-eye"></i></a>
+                            <a href="{{path('app_product_edit', {'id' : product.id})}}"><i class="fa-solid fa-pen mt-4"></i></a>
+                            <form action="{{path('app_product_delete', {'id':product.id})}}" method="post">
+                                <input type="hidden" name="_csrf_token" value="{{csrf_token('delete_product_'~product.id)}}"> 
+                                <button onclick="return confirm('Confirmer cette action?')" class="border-0 bg-white" type="submit"><i style='color:red' class="fa-solid fa-trash mt-4"></i></button> 
+                            </form>
+                            </div>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="8">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    
+{% endblock %}

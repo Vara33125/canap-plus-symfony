@@ -31,12 +31,13 @@
         <a href="{{path('app_admin_store_create')}}" class="btn btn-secondary shadow"><i class="fa-solid fa-plus"></i> Nouveau magasin</a>
     </div>
      <div class="table-responsive mx-auto">
-        <table  id="myTable" class="table table-hover text-center table-bordered">
+        <table  id="myTable" class="table table-hover text-center table-bordered w-md-100">
             <thead class="table-dark">
                 <tr>
                     <th>Id</th>
                     <th>Picture</th>
                     <th>Adresse</th>
+                    <th>Maps</th>
                     <th>actions</th>
                 </tr>
             </thead>
@@ -44,7 +45,11 @@
             {% for store in stores %}
                 <tr>
                     <td>{{ store.id }}</td>
-                    <td><img  src="{{vich_uploader_asset(store, 'imageFile') | imagine_filter('admin') }}" alt="magasin {{store.id}}"></td>
+                    <td>
+                    {% if store.picture %}
+                    <img  class="image-fluid" src="{{vich_uploader_asset(store, 'imageFile') | imagine_filter('admin') }}" alt="magasin {{store.id}}">
+                {% endif %}
+                    </td>
                     <td>
                         <div>
                             <p>{{ store.adresse }}</p>
@@ -54,6 +59,7 @@
                             </div>
                         </div>
                     </td>
+                    <td>{{store.map [:50]}} ...</td>
                     <td>
                         <div class="d-flex  justify-content-around ">
                                                         
@@ -74,3 +80,9 @@
         </table>
     </div>
 {% endblock %}
+
+
+{# Westfield Carré Sénart - 3 All. du Préambule
+Lieusaint
+77127
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2637.7355684526915!2d2.5455262767449813!3d48.61490471781019!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e5e395df8edf11%3A0xca6234102084369!2sWestfield%20Carr%C3%A9%20S%C3%A9nart!5e0!3m2!1sfr!2sfr!4v1716756577721!5m2!1sfr!2sfr" width="300" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> #}

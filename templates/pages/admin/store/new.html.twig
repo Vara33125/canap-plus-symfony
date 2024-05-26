@@ -36,6 +36,11 @@
                         <div class="text-danger">{{form_errors(form.cp)}}</div>
                     </div>
                     <div class="mb-3">
+                        <label for="admin_post_form_cp">Map</label>
+                        {{ form_widget(form.map, {"attr":{"class":"form-control"}})}}
+                        <div class="text-danger">{{form_errors(form.map)}}</div>
+                    </div>
+                    <div class="mb-3">
                         <input formnovalidate type="submit" class="btn btn-secondary shadow" value="Ajouter">
                     </div>
                 {{form_end(form)}}

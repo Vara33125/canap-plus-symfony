@@ -1,10 +1,7 @@
 <?php
 namespace App\Controller\Admin\Store;
 
-
-
 use App\Entity\Store;
-
 use App\Form\StoreFormType;
 use App\Repository\StoreRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -34,7 +31,8 @@ class AdminStoreController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($store);
             $em->flush();
-
+            
+            $this->addFlash("success", "Le magasin a été créé");
             return $this->redirectToRoute('app_admin_store_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -56,6 +54,7 @@ class AdminStoreController extends AbstractController
             $em->persist($store);
             $em->flush();
 
+            $this->addFlash("success", "Le magasin a été modifié avec succès");
             return $this->redirectToRoute('app_admin_store_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -71,8 +70,8 @@ class AdminStoreController extends AbstractController
         if ($this->isCsrfTokenValid("delete_store_{$store->getId()}", $request->request->get('_csrf_token') )) {
             $em->remove($store);
             $em->flush();
+            $this->addFlash("success", "Le magasin a été supprimé avec succès");
         }
-
         return $this->redirectToRoute('app_admin_store_index', [], Response::HTTP_SEE_OTHER);
     }
 }

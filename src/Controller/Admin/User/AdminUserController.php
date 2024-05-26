@@ -74,13 +74,14 @@ public function delete(Request $request, User $user, EntityManagerInterface $em)
         // Vérifie si l'utilsateur a le role SUPER ADMIN
         if (in_array('ROLE_SUPER_ADMIN', $roles) )
         {
-            $this->addFlash("error", "Le SUPER ADMIN ne peux pas être supprimé");
+            $this->addFlash("error", "Le SUPER ADMIN ne peux pas être supprimé avec succès");
             return $this->redirectToRoute('app_admin_user_index', [], Response::HTTP_SEE_OTHER);
         }
         else
         {
             $em->remove($user);
             $em->flush();
+            $this->addFlash("success", "L'utilisateur {$user->getPrenom()} {$user->getNom()} a été supprimé");
         }
     }
 

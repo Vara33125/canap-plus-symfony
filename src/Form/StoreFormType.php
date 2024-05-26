@@ -19,6 +19,8 @@ class StoreFormType extends AbstractType
             ->add('adresse', TextType::class)
             ->add('ville', TextType::class)
             ->add('cp', NumberType::class)
+            ->add('map', TextType::class)
+
         ;
     }
 

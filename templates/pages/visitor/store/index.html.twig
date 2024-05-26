@@ -1,0 +1,39 @@
+{% extends 'themes/base_visitor.html.twig' %}
+
+{% block title %}Liste des magasins{% endblock %}
+{% block description %} Affichages des différents magasins de l'enseigne Canap'plus{% endblock %}
+{% block keywords %}magasins, localiser,affichage, site{% endblock %}
+{% block style %}
+    <link rel="stylesheet" href="/styles/stores.css">
+     
+{% endblock %}
+{% block main %}
+     <div>
+        <h2 class="text-center mt-4">
+          Retrouvez nos magasins
+        </h2>
+      </div>
+      <div class="container-fluid ">
+        <div id="stores" class="p-5 columnView mx-auto ">
+        {% for store in stores %}
+          <div id="store1" class="d-flex flex-row ColumnView container justify-content-around  ">
+            <div class="col-md-8 me-3 ">
+                {% if store.picture %}
+                    <img  class="image-fluid" src="{{vich_uploader_asset(store, 'imageFile') }}" alt="magasin {{store.id}}">
+                {% endif %}
+            </div>
+            <div class="col-md-4  border border-black border-opacity-25 m-4 text-center">
+              <p>{{store.adresse}}</p>
+              <div class="d-flex justify-content-center">
+                <div>{{store.cp}}</div>
+                <div>{{store.ville}}</div>
+              </div>
+            {{store.map | raw}}
+            </div>
+          </div>
+          <hr class="mx-auto">
+        {% endfor %}
+          
+        </div>
+      </div>
+{% endblock %}

@@ -45,6 +45,9 @@ class Store
     #[ORM\Column]
     private ?int $cp = null;
 
+    #[ORM\Column(length: 500, nullable: true)]
+    private ?string $map = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -110,6 +113,18 @@ class Store
     public function setCp(int $cp): static
     {
         $this->cp = $cp;
+
+        return $this;
+    }
+
+    public function getMap(): ?string
+    {
+        return $this->map;
+    }
+
+    public function setMap(?string $map): static
+    {
+        $this->map = $map;
 
         return $this;
     }

@@ -1,0 +1,55 @@
+{% extends 'themes/base_admin.html.twig' %}
+
+{% block title %}Créer un magasin{% endblock %}
+
+{% block description %}Créer un magasin{% endblock %}
+
+{% block keywords %}Admin, créer, magasin{% endblock %} 
+ 
+{% block main %}
+ <h1 class="text-center my-3 display-5">Nouvel Magasin<hr></h1>
+    {% include 'components/_alert.html.twig' %}
+    
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-9 mx-auto">
+                {{form_start(form)}}
+                    <div class="mb-3">
+                        <label for="admin_post_form_imageFile_image">Image</label>
+                        {{form_widget(form.imageFile, {'attr':{'class':'form-control'}})}}
+                        <div class="text-danger">{{form_errors(form.imageFile)}}</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="admin_post_form_adresse">Adresse</label>
+                        {{form_widget(form.adresse, {'attr':{'class':'form-control'}})}}
+                        <div class="text-danger">{{form_errors(form.adresse)}}</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="admin_post_form_ville">Ville</label>
+                        {{ form_widget(form.ville, {"attr":{"class":"form-control"}})}}
+                        <div class="text-danger">{{form_errors(form.ville)}}</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="admin_post_form_cp">Code postal</label>
+                        {{ form_widget(form.cp, {"attr":{"class":"form-control"}})}}
+                        <div class="text-danger">{{form_errors(form.cp)}}</div>
+                    </div>
+                    <div class="mb-3">
+                        <input formnovalidate type="submit" class="btn btn-secondary shadow" value="Ajouter">
+                    </div>
+                {{form_end(form)}}
+            </div>
+        </div>
+    </div>
+    {% block ckEditor %}
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create( document.querySelector( '#editor' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+    </script>
+    {% endblock %}
+{% endblock %}
